@@ -35,8 +35,12 @@ class TicketState(TypedDict):
 # 2. LLM  —  swap model name for a different Groq model
 # ─────────────────────────────────────────────────────────────
 
-llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0, 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY"))
+
+llm = ChatGroq(
+    model="llama-3.3-70b-versatile",
+    temperature=0,
+    api_key=os.environ.get("GROQ_API_KEY")
+)
 
 
 # ─────────────────────────────────────────────────────────────
