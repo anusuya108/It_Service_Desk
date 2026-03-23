@@ -1,0 +1,11 @@
+ticket_id,user_issue,expected_category,expected_priority,expected_escalated
+TKT-001,My laptop won't turn on after I spilled water on it.,hardware,high,True
+TKT-002,I forgot my password and can't log into Outlook.,account,medium,False
+TKT-003,The entire office internet is down. No one can work.,network,critical,True
+TKT-004,Microsoft Teams crashes every time I join a meeting.,software,high,False
+TKT-005,My monitor flickers and sometimes goes black.,hardware,medium,False
+TKT-006,Our ERP system is completely down.,software,critical,True
+TKT-007,I need admin rights to install software for a project.,account,low,False
+TKT-008,Wi-Fi is slow in the conference room.,network,low,False
+TKT-009,I can't connect to the VPN from home.,network,medium,False
+TKT-010,New employee needs an account set up by Monday.,account,medium,False

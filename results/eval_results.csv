@@ -1,0 +1,6 @@
+ticket_id,issue_short,expected_category,predicted_category,category_ok,expected_priority,predicted_priority,priority_ok,expected_escalated,predicted_escalated,escalation_ok
+TKT-001,My laptop won't turn on after I spilled water on it.,hardware,hardware,True,high,high,True,True,True,True
+TKT-002,I forgot my password and can't log into Outlook.,account,account,True,medium,medium,True,False,False,True
+TKT-003,The entire office internet is down. No one can work.,network,network,True,critical,critical,True,True,True,True
+TKT-004,Microsoft Teams crashes every time I join a meeting.,software,software,True,high,medium,False,False,False,True
+TKT-005,My monitor flickers and sometimes goes black.,hardware,hardware,True,medium,medium,True,False,False,True

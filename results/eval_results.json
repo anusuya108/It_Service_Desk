@@ -1,0 +1,74 @@
+{
+  "total": 5,
+  "category_accuracy": 100.0,
+  "priority_accuracy": 80.0,
+  "escalation_accuracy": 100.0,
+  "overall_accuracy": 93.3,
+  "results": [
+    {
+      "ticket_id": "TKT-001",
+      "issue_short": "My laptop won't turn on after I spilled water on it.",
+      "expected_category": "hardware",
+      "predicted_category": "hardware",
+      "category_ok": true,
+      "expected_priority": "high",
+      "predicted_priority": "high",
+      "priority_ok": true,
+      "expected_escalated": true,
+      "predicted_escalated": true,
+      "escalation_ok": true
+    },
+    {
+      "ticket_id": "TKT-002",
+      "issue_short": "I forgot my password and can't log into Outlook.",
+      "expected_category": "account",
+      "predicted_category": "account",
+      "category_ok": true,
+      "expected_priority": "medium",
+      "predicted_priority": "medium",
+      "priority_ok": true,
+      "expected_escalated": false,
+      "predicted_escalated": false,
+      "escalation_ok": true
+    },
+    {
+      "ticket_id": "TKT-003",
+      "issue_short": "The entire office internet is down. No one can work.",
+      "expected_category": "network",
+      "predicted_category": "network",
+      "category_ok": true,
+      "expected_priority": "critical",
+      "predicted_priority": "critical",
+      "priority_ok": true,
+      "expected_escalated": true,
+      "predicted_escalated": true,
+      "escalation_ok": true
+    },
+    {
+      "ticket_id": "TKT-004",
+      "issue_short": "Microsoft Teams crashes every time I join a meeting.",
+      "expected_category": "software",
+      "predicted_category": "software",
+      "category_ok": true,
+      "expected_priority": "high",
+      "predicted_priority": "medium",
+      "priority_ok": false,
+      "expected_escalated": false,
+      "predicted_escalated": false,
+      "escalation_ok": true
+    },
+    {
+      "ticket_id": "TKT-005",
+      "issue_short": "My monitor flickers and sometimes goes black.",
+      "expected_category": "hardware",
+      "predicted_category": "hardware",
+      "category_ok": true,
+      "expected_priority": "medium",
+      "predicted_priority": "medium",
+      "priority_ok": true,
+      "expected_escalated": false,
+      "predicted_escalated": false,
+      "escalation_ok": true
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+ticket_id,issue,expected_category,predicted_category,category_match,expected_priority,predicted_priority,priority_match,expected_escalated,predicted_escalated,escalation_match
+TKT-001,My laptop won't turn on after I spilled water on it....,hardware,hardware,Yes,high,high,Yes,True,True,Yes
+TKT-002,My monitor flickers and sometimes goes black....,hardware,hardware,Yes,medium,medium,Yes,False,False,Yes
+TKT-003,The office printer is making grinding noises and won't print...,hardware,hardware,Yes,medium,medium,Yes,True,True,Yes
+TKT-004,Microsoft Teams crashes every time I try to join a meeting....,software,software,Yes,high,medium,No,False,False,Yes
+TKT-005,Excel keeps showing #REF! error in my formulas....,software,software,Yes,low,medium,No,False,False,Yes
