@@ -5,10 +5,6 @@ from langgraph.graph import StateGraph, END
 from core import classify_issue, should_escalate, get_resolution
 
 
-# ─────────────────────────────
-# STATE
-# ─────────────────────────────
-
 class TicketState(TypedDict):
     ticket_id: str
     user_issue: str
@@ -18,20 +14,18 @@ class TicketState(TypedDict):
     escalated: bool
     reason: str
     escalation_reason: str
+    confidence: float
 
-
-# ─────────────────────────────
-# AGENTS
-# ─────────────────────────────
 
 def triage_agent(state: TicketState):
-    category, priority, reason = classify_issue(state["user_issue"])
+    category, priority, reason, confidence = classify_issue(state["user_issue"])
 
     return {
         **state,
         "category": category,
         "priority": priority,
         "reason": reason,
+        "confidence": confidence
     }
 
 
@@ -73,17 +67,9 @@ PRIORITY: {state['priority']}
     }
 
 
-# ─────────────────────────────
-# ROUTING
-# ─────────────────────────────
-
 def route_after_resolution(state: TicketState):
     return "escalation" if state["escalated"] else "__end__"
 
-
-# ─────────────────────────────
-# GRAPH
-# ─────────────────────────────
 
 def build_graph():
     graph = StateGraph(TicketState)
@@ -100,10 +86,6 @@ def build_graph():
     return graph.compile()
 
 
-# ─────────────────────────────
-# MAIN FUNCTION
-# ─────────────────────────────
-
 def process_ticket(ticket_id: str, user_issue: str):
     app = build_graph()
 
@@ -115,7 +97,8 @@ def process_ticket(ticket_id: str, user_issue: str):
         "resolution": "",
         "escalated": False,
         "reason": "",
-        "escalation_reason": ""
+        "escalation_reason": "",
+        "confidence": 0.0
     }
 
     return app.invoke(initial_state)
