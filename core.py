@@ -3,19 +3,19 @@
 def classify_category(text):
     t = text.lower()
 
-    if any(x in t for x in ["password","login","account","access","username"]):
+    if any(x in t for x in ["password","login","account","username","access"]):
         return "access"
 
-    elif any(x in t for x in ["vpn","network","internet","wifi","connection","latency"]):
+    elif any(x in t for x in ["vpn","network","internet","wifi","connection","latency","slow","lag","delay","disconnect","outage"]):
         return "network"
 
-    elif any(x in t for x in ["email","mail","outlook","attachment"]):
+    elif any(x in t for x in ["email","mail","outlook","attachment","inbox","send","receive"]):
         return "email"
 
-    elif any(x in t for x in ["keyboard","mouse","laptop","printer","screen","audio"]):
+    elif any(x in t for x in ["keyboard","mouse","laptop","printer","screen","audio","device"]):
         return "hardware"
 
-    elif any(x in t for x in ["software","application","install","error","crash","update"]):
+    elif any(x in t for x in ["software","application","install","error","crash","update","bug","upload","download","database"]):
         return "software"
 
     return "general"
@@ -24,30 +24,32 @@ def classify_category(text):
 def rule_priority(text):
     t = text.lower()
 
-    # critical
-    if any(x in t for x in ["ransom","hacked","breach","malware"]):
-        return "critical", 0.95
+    # 🔴 HIGH
+    if any(x in t for x in [
+        "down","not working","not working at all",
+        "failed completely","crashed","cannot login",
+        "cannot access","account locked","blocked",
+        "not turning on"
+    ]):
+        return "high"
 
-    # high signals
-    if any(x in t for x in ["down","crash","failed","not working"]):
-        return "high", 0.9
+    # 🟡 MEDIUM
+    if any(x in t for x in [
+        "slow","delay","latency","takes long",
+        "occasionally","sometimes","disconnects",
+        "drops","freezing","not responding"
+    ]):
+        return "medium"
 
-    if any(x in t for x in ["every hour","frequently","keeps happening"]):
-        return "high", 0.85
+    # 🟢 LOW
+    if any(x in t for x in [
+        "how to","request","setup","need help",
+        "forgot password","general help","install new"
+    ]):
+        return "low"
 
-    # low signals
-    if any(x in t for x in ["how to","request","need help","setup"]):
-        return "low", 0.8
-    
-    if any(x in t for x in ["completely","not at all","unable to"]):
-        return "high", 0.9
-
-    return None, None
+    return "medium"  # default safe
 
 
-def should_escalate(priority, confidence):
-    # STRICT alignment with dataset
-    if priority in ["high", "critical"]:
-        return True
-
-    return False
+def should_escalate(priority):
+    return priority == "high"
