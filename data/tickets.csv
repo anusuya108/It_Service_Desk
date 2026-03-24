@@ -5,7 +5,106 @@ TKT-003,The entire office internet is down. No one can work.,network,critical,Tr
 TKT-004,Microsoft Teams crashes every time I join a meeting.,software,high,False
 TKT-005,My monitor flickers and sometimes goes black.,hardware,medium,False
 TKT-006,Our ERP system is completely down.,software,critical,True
-TKT-007,I need admin rights to install software for a project.,account,low,False
-TKT-008,Wi-Fi is slow in the conference room.,network,low,False
-TKT-009,I can't connect to the VPN from home.,network,medium,False
-TKT-010,New employee needs an account set up by Monday.,account,medium,False
+TKT-007,I need admin rights to install software.,account,low,False
+TKT-008,WiFi is slow in the conference room.,network,low,False
+TKT-009,I can't connect to VPN from home.,network,medium,False
+TKT-010,New employee needs account setup.,account,medium,False
+
+TKT-011,Laptop overheats and shuts down randomly.,hardware,high,True
+TKT-012,Mouse not responding sometimes.,hardware,low,False
+TKT-013,Keyboard keys not working.,hardware,low,False
+TKT-014,System shows disk failure warning.,hardware,critical,True
+TKT-015,Printer not printing documents.,hardware,medium,False
+TKT-016,Battery drains very fast.,hardware,low,False
+TKT-017,USB ports not working.,hardware,medium,False
+TKT-018,Screen cracked after fall.,hardware,high,True
+TKT-019,Fan making loud noise.,hardware,medium,False
+TKT-020,Device randomly restarts.,hardware,medium,False
+
+TKT-021,Application crashes on startup.,software,medium,False
+TKT-022,Excel file not opening.,software,low,False
+TKT-023,Software installation fails.,software,medium,False
+TKT-024,Report generation is very slow.,software,medium,False
+TKT-025,CRM not loading for team.,software,critical,True
+TKT-026,Update stuck at 60 percent.,software,medium,False
+TKT-027,Application logs out frequently.,software,low,False
+TKT-028,Video app crashes during calls.,software,medium,False
+TKT-029,System freezes when saving file.,software,medium,False
+TKT-030,Software shows unknown error code.,software,medium,False
+
+TKT-031,Internet not working for entire building.,network,critical,True
+TKT-032,WiFi disconnects frequently.,network,medium,False
+TKT-033,VPN connects but no access.,network,medium,False
+TKT-034,Network slow for all users.,network,high,True
+TKT-035,Cannot access shared drive.,network,medium,False
+TKT-036,Website not loading internally.,network,medium,False
+TKT-037,LAN cable not detecting.,network,medium,False
+TKT-038,File server down for everyone.,network,critical,True
+TKT-039,Emails not syncing.,network,medium,False
+TKT-040,Remote desktop fails.,network,medium,False
+
+TKT-041,Access denied for shared folder.,account,medium,False
+TKT-042,Password reset not working.,account,medium,False
+TKT-043,MFA code not received.,account,medium,False
+TKT-044,Account locked after attempts.,account,medium,False
+TKT-045,New user onboarding issue.,account,medium,False
+TKT-046,Permissions missing for tool.,account,low,False
+TKT-047,Cannot access admin panel.,account,medium,False
+TKT-048,User role incorrect.,account,low,False
+TKT-049,Login loop after entering password.,account,medium,False
+TKT-050,Account disabled unexpectedly.,account,high,False
+
+TKT-051,Clicked suspicious email link.,other,critical,True
+TKT-052,System shows ransom message.,other,critical,True
+TKT-053,Files missing from shared drive.,other,critical,True
+TKT-054,Strange login activity detected.,other,critical,True
+TKT-055,Popups appearing continuously.,other,high,True
+TKT-056,System running extremely slow suddenly.,other,high,False
+TKT-057,Data not saving properly.,other,medium,False
+TKT-058,Unknown background process running.,other,high,True
+TKT-059,Antivirus alerts showing threats.,other,high,True
+TKT-060,Unauthorized software installed.,other,high,True
+
+TKT-061,Laptop not charging properly.,hardware,medium,False
+TKT-062,Touchpad not working.,hardware,low,False
+TKT-063,Monitor not detected.,hardware,medium,False
+TKT-064,External drive not recognized.,hardware,medium,False
+TKT-065,Device overheating during use.,hardware,medium,False
+TKT-066,System making clicking noise.,hardware,high,True
+TKT-067,Bluetooth not connecting.,hardware,low,False
+TKT-068,Power button not responding.,hardware,high,True
+TKT-069,Device shuts down on battery.,hardware,medium,False
+TKT-070,Screen brightness flickers.,hardware,medium,False
+
+TKT-071,App crashes when exporting data.,software,medium,False
+TKT-072,Login page not loading.,software,medium,False
+TKT-073,Software freezes after update.,software,medium,False
+TKT-074,Unable to save documents.,software,medium,False
+TKT-075,Error while syncing files.,software,medium,False
+TKT-076,System lag during heavy tasks.,software,medium,False
+TKT-077,Application fails to launch.,software,medium,False
+TKT-078,Tool not responding to input.,software,medium,False
+TKT-079,Crash when opening reports.,software,medium,False
+TKT-080,Software UI not loading.,software,low,False
+
+TKT-081,Entire floor internet is slow.,network,high,True
+TKT-082,VPN disconnects randomly.,network,medium,False
+TKT-083,WiFi not visible.,network,medium,False
+TKT-084,Network drops during meetings.,network,medium,False
+TKT-085,Server connection timeout.,network,medium,False
+TKT-086,Packet loss observed.,network,high,True
+TKT-087,Internal site unreachable.,network,medium,False
+TKT-088,Internet works but apps fail.,network,medium,False
+TKT-089,Router needs frequent restart.,network,medium,False
+TKT-090,Connection unstable during calls.,network,medium,False
+
+TKT-091,User cannot access email.,account,medium,False
+TKT-092,Password expired message.,account,low,False
+TKT-093,Access revoked unexpectedly.,account,high,False
+TKT-094,Unable to login after update.,account,medium,False
+TKT-095,Permissions changed automatically.,account,medium,False
+TKT-096,Admin rights not applied.,account,low,False
+TKT-097,Account locked after login.,account,medium,False
+TKT-098,SSO login failing.,account,medium,False
+TKT-099,New hire cannot access systems.,account,medium,False
+TKT-100,User sees access denied error.,account,medium,False

@@ -1,84 +1,98 @@
-# core.py
+# core.py — rule-based logic used by agent.py
 
 def classify_issue(issue: str):
+    """Returns (category, priority, reason, confidence)"""
     issue_lower = issue.lower()
+    reason = "rule-based"
+    confidence = 0.9
 
-    # CATEGORY + REASON
-    if any(x in issue_lower for x in ["laptop", "monitor", "keyboard", "mouse", "water", "flicker"]):
-        category = "hardware"
-        cat_reason = "Detected physical device keywords → hardware issue"
-        confidence = 0.9
-
-    elif any(x in issue_lower for x in ["internet", "vpn", "wifi", "network"]):
+    # ── CATEGORY ──────────────────────────────────────
+    if any(x in issue_lower for x in [
+        "internet", "wifi", "network", "vpn", "server", "connection",
+        "shared drive", "website", "lan", "sync", "remote"
+    ]):
         category = "network"
-        cat_reason = "Detected connectivity-related keywords → network issue"
-        confidence = 0.88
 
-    elif any(x in issue_lower for x in ["password", "login", "account", "access"]):
+    elif any(x in issue_lower for x in [
+        "password", "login", "account", "access", "permission", "admin", "mfa"
+    ]):
         category = "account"
-        cat_reason = "Detected authentication-related keywords → account issue"
-        confidence = 0.85
 
-    elif any(x in issue_lower for x in ["crash", "erp", "software", "application", "teams"]):
+    elif any(x in issue_lower for x in [
+        "laptop", "keyboard", "mouse", "monitor", "battery",
+        "disk", "screen", "fan", "usb", "printer", "spilled", "water"
+    ]):
+        category = "hardware"
+
+    elif any(x in issue_lower for x in [
+        "software", "application", "erp", "teams", "excel",
+        "crash", "error", "update", "freeze", "opening", "outlook"
+    ]):
         category = "software"
-        cat_reason = "Detected application-related keywords → software issue"
-        confidence = 0.87
 
     else:
         category = "other"
-        cat_reason = "No clear keywords → fallback category"
-        confidence = 0.6
+        confidence = 0.5
 
-    # PRIORITY + REASON
-    if any(x in issue_lower for x in ["entire office", "everyone", "all users", "system down", "erp"]):
+    # ── PRIORITY ──────────────────────────────────────
+    if "disk failure" in issue_lower:
         priority = "critical"
-        pri_reason = "Multiple users/system outage → critical priority"
-        confidence += 0.05
 
-    elif any(x in issue_lower for x in ["water", "not turn on", "down", "can't work"]):
+    elif any(x in issue_lower for x in ["all users", "everyone", "entire"]) and "down" in issue_lower:
+        priority = "critical"
+
+    elif "erp" in issue_lower and "down" in issue_lower:
+        priority = "critical"
+
+    elif "ransom" in issue_lower or "breach" in issue_lower or "data loss" in issue_lower:
+        priority = "critical"
+
+    elif any(x in issue_lower for x in [
+        "won't turn on", "not turning on", "overheat", "shuts down", "cracked",
+        "spilled", "water"
+    ]):
         priority = "high"
-        pri_reason = "Device failure or blocking issue → high priority"
 
-    elif any(x in issue_lower for x in ["vpn", "password", "login"]):
+    elif any(x in issue_lower for x in [
+        "keyboard", "mouse", "battery", "slow", "logs out", "flickering"
+    ]):
+        priority = "low"
+
+    elif any(x in issue_lower for x in [
+        "crash", "crashes", "not working", "not responding",
+        "remote desktop", "mfa", "connect", "forgot", "password"
+    ]):
         priority = "medium"
-        pri_reason = "Single user access issue → medium priority"
 
     else:
-        priority = "low"
-        pri_reason = "Minor issue → low priority"
-        confidence -= 0.1
+        priority = "medium"
 
-    reason = f"{cat_reason}. {pri_reason}."
-
-    return category, priority, reason, round(confidence, 2)
+    return category, priority, reason, confidence
 
 
-def should_escalate(category, priority, issue):
+def should_escalate(category: str, priority: str, issue: str):
+    """Returns (escalated: bool, reason: str)"""
     issue_lower = issue.lower()
 
     if priority == "critical":
-        return True, "Critical system outage requires immediate escalation"
+        return True, "Critical priority — requires immediate senior attention"
 
-    if category == "hardware" and "water" in issue_lower:
-        return True, "Water damage requires physical inspection"
+    if any(x in issue_lower for x in ["data loss", "security breach", "ransom"]):
+        return True, "Security or data loss incident — escalate to SOC"
 
-    if "ransomware" in issue_lower or "security" in issue_lower:
-        return True, "Security incident requires specialized team"
+    if priority == "high":
+        return True, "High priority — escalated to Level 2 support"
 
-    return False, "Issue can be resolved at Level 1"
+    return False, ""
 
 
-def get_resolution(category):
-    if category == "account":
-        return "Reset password via SSO portal. If unsuccessful, contact IT admin."
-
-    if category == "hardware":
-        return "Do NOT power on device. Disconnect power and submit hardware repair request."
-
-    if category == "network":
-        return "Check Wi-Fi/VPN connection. Restart router. Contact IT if issue persists."
-
-    if category == "software":
-        return "Restart application. Reinstall if issue continues."
-
-    return "Contact IT support for further assistance."
+def get_resolution(category: str, issue: str):
+    """Returns a resolution string based on category"""
+    resolutions = {
+        "network":  "Restart router or VPN client. Check network cables. If the issue affects multiple users, contact the Network Operations Centre.",
+        "account":  "Reset your password via the self-service portal or contact the helpdesk. If MFA is failing, contact the IAM team.",
+        "hardware": "Check all physical connections. If the device is damaged (e.g. liquid spill), do not power on — bring it to the IT desk for inspection.",
+        "software": "Restart the application. If it persists, try reinstalling or updating the software. Clear the application cache if available.",
+        "other":    "Please provide more details so we can assist. Basic troubleshooting: restart your device and try again.",
+    }
+    return resolutions.get(category, "No resolution available. Please contact the helpdesk.")
