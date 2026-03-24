@@ -1,8 +1,4 @@
-langgraph
-langchain
-langchain-groq
-langchain-core
-python-dotenv
 pandas
+scikit-learn
+langgraph
 streamlit
-tabulate

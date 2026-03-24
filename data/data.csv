@@ -1,0 +1,63 @@
+text,category,priority,escalation
+VPN not connecting,network,high,yes
+VPN keeps dropping every hour,network,high,yes
+Internet down in office,network,high,yes
+Network connection failed repeatedly,network,high,yes
+WiFi not working at all,network,high,yes
+Server down for all users,network,high,yes
+Application crashed during use,software,high,yes
+Software not working completely,software,high,yes
+System not starting,hardware,high,yes
+Laptop not turning on,hardware,high,yes
+Email server down,email,high,yes
+Unable to send or receive emails,email,high,yes
+Account locked after attempts,access,high,yes
+Login failure repeatedly,access,high,yes
+Database not responding,software,high,yes
+System failure blocking work,software,high,yes
+Printer not working completely,hardware,high,yes
+Network outage affecting team,network,high,yes
+VPN fails frequently,network,high,yes
+Application error blocking usage,software,high,yes
+
+Slow internet speed,network,medium,no
+VPN disconnects sometimes,network,medium,no
+Network latency issue,network,medium,no
+Email delay in receiving,email,medium,no
+Unable to send attachments,email,medium,no
+Login takes long time,access,medium,no
+Password reset issue,access,medium,no
+Application running slow,software,medium,no
+Software installation failed,software,medium,no
+System performance slow,hardware,medium,no
+Keyboard not working properly,hardware,medium,no
+Mouse lag issue,hardware,medium,no
+Screen flickering sometimes,hardware,medium,no
+Email sync issue,email,medium,no
+File upload failing occasionally,software,medium,no
+VPN login issue,network,medium,no
+Application freezing sometimes,software,medium,no
+Audio not working properly,hardware,medium,no
+Printer not responding,hardware,medium,no
+Unable to install updates,software,medium,no
+
+Forgot password,access,low,no
+Need password reset,access,low,no
+Request access to system,access,low,no
+Need help setting up account,access,low,no
+Unable to remember username,access,low,no
+Request software installation,software,low,no
+Install new application,software,low,no
+Need update for software,software,low,no
+How to connect to VPN,network,low,no
+Request email setup,email,low,no
+Need help configuring email,email,low,no
+Printer setup request,hardware,low,no
+Request new keyboard,hardware,low,no
+Mouse replacement request,hardware,low,no
+System upgrade request,hardware,low,no
+Access request for dashboard,access,low,no
+Permission request for files,access,low,no
+How to use software,general,low,no
+Request documentation,general,low,no
+Need onboarding help,access,low,no

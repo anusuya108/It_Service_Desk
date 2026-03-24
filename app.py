@@ -2,7 +2,7 @@
 # Run: streamlit run app.py
 
 import streamlit as st
-from agent import process_ticket
+from retriever import process_ticket
 
 st.set_page_config(page_title="IT Service Desk", page_icon="🖥️", layout="centered")
 
