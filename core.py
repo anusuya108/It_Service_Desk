@@ -1,22 +1,24 @@
-# core.py
+# core.py — context-aware classification with visible reasoning
 
 def classify_issue(issue: str):
     """
-    Returns (category, priority, match_strength)
-    match_strength: "strong" | "weak" | "none"  — internal only, never shown to user
+    Returns (category, priority, reasoning, match_strength)
+    reasoning: human-readable explanation of the priority decision
+    match_strength: internal only — "strong" | "weak" | "none"
     """
     t = issue.lower()
 
+    # ── CATEGORY SCORING ──────────────────────────────
     network_kw  = ["internet","wifi","network","vpn","connection","shared drive",
-                   "website","lan","sync","remote","firewall","ping","bandwidth","outage"]
+                   "website","lan","remote","firewall","ping","bandwidth","outage","offline"]
     account_kw  = ["password","login","account","access","permission","admin",
                    "mfa","locked out","sign in","username","credentials","2fa","authenticate"]
     hardware_kw = ["laptop","keyboard","mouse","monitor","battery","disk","screen",
                    "fan","usb","printer","spilled","water","cable","charger","webcam",
-                   "headset","docking","hardware","broken","physical","device"]
+                   "headset","docking","broken","physical","device","hardware"]
     software_kw = ["software","application","erp","teams","excel","crash","error",
-                   "update","freeze","outlook","install","uninstall","app","browser",
-                   "windows","office","adobe","opening","not opening","slow","bug"]
+                   "update","freeze","outlook","install","app","browser","windows",
+                   "office","adobe","not opening","slow","bug","not responding"]
 
     scores = {
         "network":  sum(1 for k in network_kw  if k in t),
@@ -24,59 +26,71 @@ def classify_issue(issue: str):
         "hardware": sum(1 for k in hardware_kw if k in t),
         "software": sum(1 for k in software_kw if k in t),
     }
-
     best_cat   = max(scores, key=scores.get)
     best_score = scores[best_cat]
 
     if best_score == 0:
-        category      = "other"
+        category       = "other"
         match_strength = "none"
     elif best_score == 1:
-        category      = best_cat
+        category       = best_cat
         match_strength = "weak"
     else:
-        category      = best_cat
+        category       = best_cat
         match_strength = "strong"
 
-    priority = _get_priority(t)
-    return category, priority, match_strength
+    # ── CONTEXT-AWARE PRIORITY + REASONING ────────────
+    priority, reasoning = _get_priority_with_reason(t)
+
+    return category, priority, reasoning, match_strength
 
 
-def _get_priority(t: str) -> str:
-    """Impact-based priority — checks scope and severity signals"""
+def _get_priority_with_reason(t: str):
+    """
+    Returns (priority, reasoning) — reasoning shown to user.
+    Checks CONTEXT signals, not just keywords.
+    """
 
-    # ── CRITICAL: office-wide / security / data loss ──
+    # ── CRITICAL ──────────────────────────────────────
+    if any(x in t for x in ["ransomware","ransom","security breach",
+                              "hacked","cyberattack","virus outbreak","malware spreading"]):
+        return "critical", "Active security incident detected — immediate escalation required with no delay."
+
     if any(x in t for x in ["entire office","whole office","everyone","all users",
-                              "all staff","company-wide","organisation"]) and \
-       any(x in t for x in ["down","offline","not working","unavailable","outage"]):
-        return "critical"
+                              "all staff","company-wide","entire building","whole company"]) \
+       and any(x in t for x in ["down","offline","not working","unavailable","outage","cannot access"]):
+        return "critical", "Office-wide outage affecting all users — business operations are halted."
 
-    if any(x in t for x in ["ransomware","ransom","security breach","hacked",
-                              "data loss","virus outbreak","malware","cyberattack"]):
-        return "critical"
+    if "erp" in t and any(x in t for x in ["down","offline","not working","unavailable"]):
+        return "critical", "Core business system (ERP) is down — critical business impact."
 
-    if "erp" in t and any(x in t for x in ["down","offline","not working"]):
-        return "critical"
+    if any(x in t for x in ["data loss","disk failure","complete outage","production down"]):
+        return "critical", "Critical data or system failure — immediate senior intervention required."
 
-    if "disk failure" in t or "complete outage" in t:
-        return "critical"
+    # ── HIGH ──────────────────────────────────────────
+    if any(x in t for x in ["ceo","cto","cfo","coo","vp ","vice president",
+                              "director","executive","vip","c-suite","board"]):
+        return "high", "Senior executive affected — elevated priority per escalation policy."
 
-    # ── HIGH: one person fully blocked ────────────────
-    if any(x in t for x in ["ceo","cto","cfo","vp ","director","executive","vip"]):
-        return "high"   # senior user always high minimum
+    if any(x in t for x in ["admin of production","production system","live system",
+                              "customer-facing","client demo","before the meeting","urgent deadline"]):
+        return "high", "Issue impacts a production or time-sensitive system — elevated priority."
 
     if any(x in t for x in ["won't turn on","not turning on","spilled","water damage",
-                              "cracked","overheat","shuts down","cannot work",
-                              "completely blocked","not starting","physical damage"]):
-        return "high"
+                              "cracked","overheat","shuts down","cannot work","completely blocked",
+                              "physical damage","not starting"]):
+        return "high", "User is completely unable to work due to hardware failure — high impact."
 
-    # ── LOW: cosmetic / how-to ─────────────────────────
-    if any(x in t for x in ["how to","how do i","setup","configure","slow",
-                              "slightly","minor","feature request","cosmetic","tip"]):
-        return "low"
+    if "multiple users" in t or "several users" in t or "my team" in t:
+        return "high", "Issue affects multiple users — broader business impact than a single-user problem."
 
-    # ── MEDIUM: everything else ────────────────────────
-    return "medium"
+    # ── LOW ───────────────────────────────────────────
+    if any(x in t for x in ["how to","how do i","setup","configure","slightly slow",
+                              "minor","cosmetic","feature request","tip","advice","best way"]):
+        return "low", "Non-urgent enquiry or minor inconvenience with no significant business impact."
+
+    # ── MEDIUM ────────────────────────────────────────
+    return "medium", "Single-user issue with workaround likely available — standard response time applies."
 
 
 def get_team(category: str, issue: str) -> str:

@@ -1,4 +1,4 @@
-# app.py — Streamlit web UI
+# app.py — IT Service Desk UI (intelligent version)
 # Run with: streamlit run app.py
 
 import streamlit as st
@@ -32,25 +32,34 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 .agent-card { background:#161b27; border:1px solid #1e2d40; border-radius:12px;
               padding:1.25rem 1.4rem; margin:0.6rem 0; position:relative; overflow:hidden; }
 .agent-card::before { content:''; position:absolute; left:0; top:0; bottom:0;
-                       width:3px; border-radius:3px 0 0 3px; }
+                      width:3px; border-radius:3px 0 0 3px; }
 .agent-card.triage::before     { background:#f59e0b; }
 .agent-card.resolution::before { background:#10b981; }
 .agent-card.escalation::before { background:#ef4444; }
 .agent-card.critical::before   { background:#ef4444; }
+.agent-card.memory::before     { background:#8b5cf6; }
 
-.agent-label { font-family:'JetBrains Mono',monospace; font-size:0.68rem; font-weight:500;
-               letter-spacing:0.09em; text-transform:uppercase; margin-bottom:10px; }
+.agent-label { font-family:'JetBrains Mono',monospace; font-size:0.68rem;
+               font-weight:500; letter-spacing:0.09em; text-transform:uppercase; margin-bottom:10px; }
 .agent-card.triage .agent-label     { color:#f59e0b; }
 .agent-card.resolution .agent-label { color:#10b981; }
 .agent-card.escalation .agent-label { color:#ef4444; }
 .agent-card.critical .agent-label   { color:#ef4444; }
+.agent-card.memory .agent-label     { color:#8b5cf6; }
 
 .agent-content { color:#cbd5e1; font-size:0.9rem; line-height:1.75; }
-.reasoning-box { background:#0d1520; border-radius:8px; padding:10px 14px; margin-top:12px;
-                 font-size:0.84rem; color:#64748b; line-height:1.6; }
 
-.badge { display:inline-block; padding:2px 10px; border-radius:20px;
-         font-size:0.73rem; font-weight:500; font-family:'JetBrains Mono',monospace; margin:2px 3px; }
+.reasoning-box { background:#0d1520; border-radius:8px; padding:10px 14px;
+                 margin-top:12px; font-size:0.84rem; color:#64748b; line-height:1.6; }
+.reason-pill   { display:inline-block; background:#0d1520; border:1px solid #1e3a5f;
+                 border-radius:6px; padding:4px 10px; font-size:0.78rem; color:#64748b;
+                 margin-top:8px; font-style:italic; }
+.memory-box    { background:#130d2a; border:1px solid #2d1f5e; border-radius:8px;
+                 padding:10px 14px; margin-top:10px; font-size:0.83rem;
+                 color:#a78bfa; line-height:1.6; }
+
+.badge { display:inline-block; padding:2px 10px; border-radius:20px; font-size:0.73rem;
+         font-weight:500; font-family:'JetBrains Mono',monospace; margin:2px 3px; }
 .badge-critical { background:#450a0a; color:#fca5a5; border:1px solid #7f1d1d; }
 .badge-high     { background:#431407; color:#fdba74; border:1px solid #7c2d12; }
 .badge-medium   { background:#1e3a5f; color:#93c5fd; border:1px solid #1e40af; }
@@ -77,24 +86,23 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ── SESSION STATE ─────────────────────────────────────
 if "history" not in st.session_state:
     st.session_state.history = []
 if "counter" not in st.session_state:
     st.session_state.counter = 1
 
-# ── SAMPLE TICKETS ────────────────────────────────────
+# ── SAMPLES ───────────────────────────────────────────
 st.markdown('<div class="section-lbl">Quick samples</div>', unsafe_allow_html=True)
 samples = {
-    "Select a sample...":             "",
-    "Spilled water on laptop":        "My laptop won't turn on after I spilled water on it.",
-    "Forgot Outlook password":        "I forgot my password and can't log into Outlook.",
-    "Entire office internet down":    "The entire office internet is down. No one can work.",
-    "Ransomware on screen":           "I clicked a suspicious link and now see a ransom message on screen.",
-    "CEO cannot access email":        "The CEO cannot access his email since this morning.",
-    "Teams crashes every meeting":    "Microsoft Teams crashes every time I try to join a meeting.",
-    "Cannot connect to VPN":          "I can't connect to the company VPN from home since yesterday.",
-    "Monitor flickering":             "My monitor keeps flickering and sometimes goes completely black.",
+    "Select a sample...":                             "",
+    "Spilled water on laptop":                        "My laptop won't turn on after I spilled water on it.",
+    "Forgot password (production admin)":             "I forgot my password and I am the admin of the production system.",
+    "Entire office internet down":                    "The entire office internet is down. No one can work.",
+    "CEO cannot access email":                        "The CEO cannot access his email since this morning.",
+    "Ransomware message on screen":                   "I clicked a suspicious link and now see a ransom message on my screen.",
+    "Teams crashes every meeting":                    "Microsoft Teams crashes every time I try to join a meeting.",
+    "Cannot connect to VPN from home":                "I can't connect to the company VPN from home since yesterday.",
+    "Monitor flickering":                             "My monitor keeps flickering and sometimes goes completely black.",
 }
 selected  = st.selectbox("", list(samples.keys()), label_visibility="collapsed")
 prefill   = samples[selected] if selected != "Select a sample..." else ""
@@ -103,7 +111,7 @@ prefill   = samples[selected] if selected != "Select a sample..." else ""
 st.markdown('<div class="section-lbl">Describe your issue</div>', unsafe_allow_html=True)
 user_issue = st.text_area(
     "", value=prefill, height=110,
-    placeholder="e.g. My laptop won't start after the Windows update...",
+    placeholder="e.g. I forgot my password and I am the admin of the production system...",
     label_visibility="collapsed"
 )
 submit = st.button("Submit Ticket →")
@@ -118,55 +126,45 @@ if submit:
 
         with st.spinner("Analysing your ticket..."):
             try:
-                result = process_ticket(ticket_id, user_issue)
+                r = process_ticket(ticket_id, user_issue)
             except Exception:
                 st.error("Unable to process your ticket right now. Please try again.")
                 st.stop()
 
-        # Safe defaults — never crash on missing keys
-        r = result
+        # Safe defaults
         r.setdefault("category",          "other")
         r.setdefault("priority",          "medium")
+        r.setdefault("priority_reason",   "")
         r.setdefault("triage_reasoning",  "")
+        r.setdefault("similar_past",      "")
         r.setdefault("resolution",        "Please contact the IT helpdesk directly.")
         r.setdefault("escalated",         False)
         r.setdefault("escalation_reason", "")
         r.setdefault("escalation_report", "")
 
-        # Save to history
         st.session_state.history.insert(0, {
-            "ticket_id": ticket_id,
-            "issue":     user_issue,
-            "result":    r
+            "ticket_id": ticket_id, "issue": user_issue, "result": r
         })
 
         # ── Metrics ──────────────────────────────────
         esc_label = "YES" if r["escalated"] else "NO"
         st.markdown(f"""
         <div class="metrics-row">
-            <div class="metric-box">
-                <div class="metric-val">{ticket_id}</div>
-                <div class="metric-lbl">Ticket ID</div>
-            </div>
-            <div class="metric-box">
-                <div class="metric-val">{r['category'].upper()}</div>
-                <div class="metric-lbl">Category</div>
-            </div>
-            <div class="metric-box">
-                <div class="metric-val">{r['priority'].upper()}</div>
-                <div class="metric-lbl">Priority</div>
-            </div>
-            <div class="metric-box">
-                <div class="metric-val">{esc_label}</div>
-                <div class="metric-lbl">Escalated</div>
-            </div>
+            <div class="metric-box"><div class="metric-val">{ticket_id}</div><div class="metric-lbl">Ticket ID</div></div>
+            <div class="metric-box"><div class="metric-val">{r['category'].upper()}</div><div class="metric-lbl">Category</div></div>
+            <div class="metric-box"><div class="metric-val">{r['priority'].upper()}</div><div class="metric-lbl">Priority</div></div>
+            <div class="metric-box"><div class="metric-val">{esc_label}</div><div class="metric-lbl">Escalated</div></div>
         </div>
         """, unsafe_allow_html=True)
 
-        # ── Agent 1: Triage ───────────────────────────
         st.markdown('<div class="section-lbl">Agent outputs</div>', unsafe_allow_html=True)
 
-        reasoning = r["triage_reasoning"] or f"Classified as {r['category']} with {r['priority']} priority."
+        # ── Agent 1: Triage ───────────────────────────
+        reasoning     = r["triage_reasoning"] or f"Classified as {r['category']} with {r['priority']} priority."
+        priority_why  = r["priority_reason"]
+        similar_block = ""
+        if r["similar_past"]:
+            similar_block = f'<div class="memory-box">&#128196; {r["similar_past"]}</div>'
 
         st.markdown(f"""
         <div class="agent-card triage">
@@ -176,12 +174,13 @@ if submit:
                 &nbsp; Priority: <span class="badge badge-{r['priority']}">{r['priority'].upper()}</span>
             </div>
             <div class="reasoning-box">{reasoning}</div>
+            {f'<div class="reason-pill">{priority_why}</div>' if priority_why else ""}
+            {similar_block}
         </div>
         """, unsafe_allow_html=True)
 
         # ── Agent 2: Resolution ───────────────────────
         if r["priority"] == "critical":
-            # Critical — clean message, no pointless steps
             st.markdown(f"""
             <div class="agent-card critical">
                 <div class="agent-label">Agent 2 — Resolution</div>
@@ -192,7 +191,7 @@ if submit:
             res_html = r["resolution"].replace("\n","<br>")
             st.markdown(f"""
             <div class="agent-card escalation">
-                <div class="agent-label">Agent 2 — Resolution (escalating)</div>
+                <div class="agent-label">Agent 2 — Resolution (escalating to L2)</div>
                 <div class="agent-content">{res_html}</div>
             </div>
             """, unsafe_allow_html=True)
@@ -224,7 +223,7 @@ if submit:
             </div>
             """, unsafe_allow_html=True)
 
-# ── SESSION HISTORY ───────────────────────────────────
+# ── HISTORY ───────────────────────────────────────────
 if st.session_state.history:
     st.markdown("---")
     st.markdown('<div class="section-lbl">Session history</div>', unsafe_allow_html=True)
@@ -235,14 +234,9 @@ if st.session_state.history:
         cat  = r.get("category","other")
         st.markdown(f"""
         <div style="background:#161b27;border:1px solid #1e2d40;border-radius:8px;
-                    padding:0.75rem 1rem;margin:0.35rem 0;
-                    display:flex;align-items:center;gap:10px;">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;
-                         color:#475569;min-width:65px;">{item['ticket_id']}</span>
-            <span style="flex:1;font-size:0.84rem;color:#94a3b8;
-                         overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
-                {item['issue'][:72]}
-            </span>
+                    padding:0.75rem 1rem;margin:0.35rem 0;display:flex;align-items:center;gap:10px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#475569;min-width:65px;">{item['ticket_id']}</span>
+            <span style="flex:1;font-size:0.84rem;color:#94a3b8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{item['issue'][:72]}</span>
             <span class="badge badge-cat">{cat}</span>
             <span class="badge badge-{pri}">{pri.upper()}</span>
             <span style="font-size:0.85rem;">{icon}</span>
@@ -252,8 +246,8 @@ if st.session_state.history:
 # ── FOOTER ────────────────────────────────────────────
 st.markdown("---")
 st.markdown("""
-<div style="text-align:center;font-size:0.72rem;color:#334155;
-            padding:0.5rem 0 1.5rem;font-family:'JetBrains Mono',monospace;">
-    LangGraph &nbsp;·&nbsp; 3 agents &nbsp;·&nbsp; Groq &nbsp;·&nbsp; llama-3.3-70b-versatile
+<div style="text-align:center;font-size:0.72rem;color:#334155;padding:0.5rem 0 1.5rem;
+            font-family:'JetBrains Mono',monospace;">
+    LangGraph &nbsp;·&nbsp; 3 agents &nbsp;·&nbsp; Groq &nbsp;·&nbsp; memory &nbsp;·&nbsp; llama-3.3-70b-versatile
 </div>
 """, unsafe_allow_html=True)
