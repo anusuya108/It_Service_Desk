@@ -1,68 +1,82 @@
-# core.py — rule-based logic used by agent.py
+# core.py — rule-based logic + honest confidence scoring
 
 def classify_issue(issue: str):
-    """Returns (category, priority, reason, confidence)"""
+    """
+    Returns (category, priority, reason, confidence)
+    confidence is REAL — calculated from keyword match strength
+    """
     issue_lower = issue.lower()
-    reason = "rule-based"
-    confidence = 0.9
 
-    # ── CATEGORY ──────────────────────────────────────
-    if any(x in issue_lower for x in [
-        "internet", "wifi", "network", "vpn", "server", "connection",
-        "shared drive", "website", "lan", "sync", "remote"
-    ]):
-        category = "network"
+    # ── KEYWORD BANKS ─────────────────────────────────
+    network_kw  = ["internet","wifi","network","vpn","server","connection",
+                   "shared drive","website","lan","sync","remote","firewall","ping"]
+    account_kw  = ["password","login","account","access","permission","admin",
+                   "mfa","locked out","sign in","username","credentials","2fa"]
+    hardware_kw = ["laptop","keyboard","mouse","monitor","battery","disk",
+                   "screen","fan","usb","printer","spilled","water","cable",
+                   "charger","hardware","headset","webcam","docking"]
+    software_kw = ["software","application","erp","teams","excel","crash",
+                   "error","update","freeze","opening","outlook","install",
+                   "uninstall","app","browser","windows","office","adobe"]
 
-    elif any(x in issue_lower for x in [
-        "password", "login", "account", "access", "permission", "admin", "mfa"
-    ]):
-        category = "account"
+    scores = {
+        "network":  sum(1 for k in network_kw  if k in issue_lower),
+        "account":  sum(1 for k in account_kw  if k in issue_lower),
+        "hardware": sum(1 for k in hardware_kw if k in issue_lower),
+        "software": sum(1 for k in software_kw if k in issue_lower),
+    }
 
-    elif any(x in issue_lower for x in [
-        "laptop", "keyboard", "mouse", "monitor", "battery",
-        "disk", "screen", "fan", "usb", "printer", "spilled", "water"
-    ]):
-        category = "hardware"
+    best_cat   = max(scores, key=scores.get)
+    best_score = scores[best_cat]
 
-    elif any(x in issue_lower for x in [
-        "software", "application", "erp", "teams", "excel",
-        "crash", "error", "update", "freeze", "opening", "outlook"
-    ]):
-        category = "software"
-
+    # Real confidence based on match strength
+    if best_score == 0:
+        category   = "other"
+        confidence = 0.4
+        reason     = "no keyword match — LLM will classify"
+    elif best_score == 1:
+        category   = best_cat
+        confidence = 0.65
+        reason     = f"weak rule match ({best_cat}, 1 keyword)"
+    elif best_score == 2:
+        category   = best_cat
+        confidence = 0.80
+        reason     = f"rule-based ({best_cat}, {best_score} keywords)"
     else:
-        category = "other"
-        confidence = 0.5
+        category   = best_cat
+        confidence = 0.95
+        reason     = f"strong rule match ({best_cat}, {best_score} keywords)"
 
     # ── PRIORITY ──────────────────────────────────────
-    if "disk failure" in issue_lower:
+    if any(x in issue_lower for x in ["disk failure","complete outage","data loss","ransomware"]):
         priority = "critical"
 
-    elif any(x in issue_lower for x in ["all users", "everyone", "entire"]) and "down" in issue_lower:
+    elif any(x in issue_lower for x in ["all users","everyone","entire","whole office"]) \
+         and "down" in issue_lower:
         priority = "critical"
 
     elif "erp" in issue_lower and "down" in issue_lower:
         priority = "critical"
 
-    elif "ransom" in issue_lower or "breach" in issue_lower or "data loss" in issue_lower:
+    elif any(x in issue_lower for x in ["ransom","breach","hacked","virus","malware"]):
         priority = "critical"
 
     elif any(x in issue_lower for x in [
-        "won't turn on", "not turning on", "overheat", "shuts down", "cracked",
-        "spilled", "water"
+        "won't turn on","not turning on","overheat","shuts down",
+        "cracked","spilled","water","not starting","physical damage"
     ]):
         priority = "high"
 
     elif any(x in issue_lower for x in [
-        "keyboard", "mouse", "battery", "slow", "logs out", "flickering"
-    ]):
-        priority = "low"
-
-    elif any(x in issue_lower for x in [
-        "crash", "crashes", "not working", "not responding",
-        "remote desktop", "mfa", "connect", "forgot", "password"
+        "crash","crashes","not working","not responding","can't connect",
+        "mfa","remote desktop","forgot","locked out","multiple users"
     ]):
         priority = "medium"
+
+    elif any(x in issue_lower for x in [
+        "slow","flickering","how to","setup","configure","feature"
+    ]):
+        priority = "low"
 
     else:
         priority = "medium"
@@ -71,28 +85,16 @@ def classify_issue(issue: str):
 
 
 def should_escalate(category: str, priority: str, issue: str):
-    """Returns (escalated: bool, reason: str)"""
+    """Rule-based pre-check. Final escalation decision is made by LLM in agent.py"""
     issue_lower = issue.lower()
 
     if priority == "critical":
-        return True, "Critical priority — requires immediate senior attention"
+        return True, "Critical priority — immediate senior attention required"
 
-    if any(x in issue_lower for x in ["data loss", "security breach", "ransom"]):
-        return True, "Security or data loss incident — escalate to SOC"
+    if any(x in issue_lower for x in ["ransom","breach","hacked","virus","malware","data loss"]):
+        return True, "Security incident — escalate to SOC immediately"
 
     if priority == "high":
         return True, "High priority — escalated to Level 2 support"
 
     return False, ""
-
-
-def get_resolution(category: str, issue: str):
-    """Returns a resolution string based on category"""
-    resolutions = {
-        "network":  "Restart router or VPN client. Check network cables. If the issue affects multiple users, contact the Network Operations Centre.",
-        "account":  "Reset your password via the self-service portal or contact the helpdesk. If MFA is failing, contact the IAM team.",
-        "hardware": "Check all physical connections. If the device is damaged (e.g. liquid spill), do not power on — bring it to the IT desk for inspection.",
-        "software": "Restart the application. If it persists, try reinstalling or updating the software. Clear the application cache if available.",
-        "other":    "Please provide more details so we can assist. Basic troubleshooting: restart your device and try again.",
-    }
-    return resolutions.get(category, "No resolution available. Please contact the helpdesk.")
