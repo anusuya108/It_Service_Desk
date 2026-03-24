@@ -1,0 +1,32 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+triagent/
+venv/
+env/
+
+# VS Code
+.vscode/
+
+# Jupyter (if any)
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# Model artifacts (if you save later)
+*.pkl
+
+# Temporary files
+*.tmp

@@ -1,0 +1,541 @@
+[
+  {
+    "issue": "forgot password outlook login",
+    "category": "account",
+    "priority": "medium",
+    "resolution": "Password reset via self-service portal. MFA re-enrolled. Resolved in 10 minutes.",
+    "escalated": false
+  },
+  {
+    "issue": "laptop spilled water not turning on",
+    "category": "hardware",
+    "priority": "high",
+    "resolution": "Device powered off. Brought to IT desk. Liquid damage on motherboard. Replacement laptop issued in 4 hours.",
+    "escalated": true
+  },
+  {
+    "issue": "entire office internet down outage",
+    "category": "network",
+    "priority": "critical",
+    "resolution": "NOC identified faulty core switch. Replacement completed. Connectivity restored in 45 minutes.",
+    "escalated": true
+  },
+  {
+    "issue": "teams crashes joining meeting call",
+    "category": "software",
+    "priority": "medium",
+    "resolution": "Cleared Teams cache, updated client. Root cause: corrupted cache from failed update.",
+    "escalated": false
+  },
+  {
+    "issue": "vpn not connecting working from home",
+    "category": "network",
+    "priority": "medium",
+    "resolution": "Reinstalled VPN client, updated certificate. Root cause: expired auth certificate.",
+    "escalated": false
+  },
+  {
+    "issue": "ransomware message screen clicked link",
+    "category": "other",
+    "priority": "critical",
+    "resolution": "Machine isolated immediately. SOC investigated. Contained to single device. OS reimaged in 2 hours.",
+    "escalated": true
+  },
+  {
+    "issue": "monitor flickering black screen",
+    "category": "hardware",
+    "priority": "low",
+    "resolution": "Replaced DisplayPort cable. Resolved immediately. Root cause: faulty cable.",
+    "escalated": false
+  },
+  {
+    "issue": "excel crash freeze not responding",
+    "category": "software",
+    "priority": "medium",
+    "resolution": "Disabled conflicting add-ins, repaired Office. Root cause: third-party add-in conflict.",
+    "escalated": false
+  },
+  {
+    "issue": "account locked cannot login access",
+    "category": "account",
+    "priority": "medium",
+    "resolution": "Account unlocked in AD. Root cause: 5 failed login attempts triggered lockout.",
+    "escalated": false
+  },
+  {
+    "issue": "printer not printing offline",
+    "category": "hardware",
+    "priority": "medium",
+    "resolution": "Cleared print queue, restarted print spooler. Root cause: stuck job blocking queue.",
+    "escalated": false
+  },
+  {
+    "issue": "erp system down all staff",
+    "category": "software",
+    "priority": "critical",
+    "resolution": "Escalated to Tier-2. Database service restarted. Full recovery in 90 minutes.",
+    "escalated": true
+  },
+  {
+    "issue": "file share drive inaccessible department",
+    "category": "network",
+    "priority": "high",
+    "resolution": "Permissions group membership corrected by IAM. Access restored in 2 hours.",
+    "escalated": true
+  },
+  {
+    "issue": "ceo email not working access",
+    "category": "account",
+    "priority": "high",
+    "resolution": "Exchange mailbox issue resolved by Tier-2. Root cause: mailbox quota exceeded.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-001",
+    "issue": "my laptop won't turn on after i spilled water on it.",
+    "category": "hardware",
+    "priority": "high",
+    "resolution": "1. Power off the device immediately.\n2. Disconnect all cables and power.\n3. Bring the device to the IT desk for inspection.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-002",
+    "issue": "i forgot my password and can't log into outlook.",
+    "category": "account",
+    "priority": "medium",
+    "resolution": "1. Use the self-service password reset link on the company intranet.\n2. Clear your browser cache and try again.\n3. Ensure your authenticator app time is synced.\n4. If still locked out, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-003",
+    "issue": "the entire office internet is down. no one can work.",
+    "category": "network",
+    "priority": "critical",
+    "resolution": "This issue has been identified as a critical or security incident. It is being escalated immediately to the senior support team. A specialist will contact you within the SLA window. Please do not attempt further troubleshooting.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-006",
+    "issue": "our erp system is completely down. all staff are affected.",
+    "category": "software",
+    "priority": "critical",
+    "resolution": "This issue has been identified as a critical or security incident. It is being escalated immediately to the senior support team. A specialist will contact you within the SLA window. Please do not attempt further troubleshooting.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-011",
+    "issue": "i clicked a suspicious link and now see a ransom message.",
+    "category": "other",
+    "priority": "critical",
+    "resolution": "This issue has been identified as a critical or security incident. It is being escalated immediately to the senior support team. A specialist will contact you within the SLA window. Please do not attempt further troubleshooting.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-015",
+    "issue": "the ceo cannot access his email since this morning.",
+    "category": "account",
+    "priority": "high",
+    "resolution": "1. Use the self-service password reset link on the company intranet.\n2. Clear your browser cache and try again.\n3. Ensure your authenticator app time is synced.\n4. If still locked out, please reply to this ticket.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-001",
+    "issue": "my laptop won't turn on after i spilled water on it.",
+    "category": "hardware",
+    "priority": "high",
+    "resolution": "1. Power off the device immediately.\n2. Disconnect all cables and power.\n3. Bring the device to the IT desk for inspection.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-002",
+    "issue": "i forgot my password and can't log into outlook.",
+    "category": "account",
+    "priority": "medium",
+    "resolution": "1. Use the self-service password reset link on the company intranet.\n2. Clear your browser cache and try again.\n3. Ensure your authenticator app time is synced.\n4. If still locked out, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-003",
+    "issue": "the entire office internet is down. no one can work.",
+    "category": "network",
+    "priority": "critical",
+    "resolution": "This issue has been identified as a critical or security incident. It is being escalated immediately to the senior support team. A specialist will contact you within the SLA window. Please do not attempt further troubleshooting.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-004",
+    "issue": "microsoft teams crashes every time i try to join a meeting.",
+    "category": "software",
+    "priority": "medium",
+    "resolution": "1. Close the application fully via Task Manager.\n2. Restart your computer.\n3. Check for pending updates.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-005",
+    "issue": "my monitor keeps flickering and sometimes goes completely black.",
+    "category": "hardware",
+    "priority": "low",
+    "resolution": "1. Power off the device immediately.\n2. Disconnect all cables and power.\n3. Bring the device to the IT desk for inspection.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-006",
+    "issue": "our erp system is completely down. all staff are affected.",
+    "category": "software",
+    "priority": "critical",
+    "resolution": "This issue has been identified as a critical or security incident. It is being escalated immediately to the senior support team. A specialist will contact you within the SLA window. Please do not attempt further troubleshooting.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-007",
+    "issue": "i need admin rights to install software for a project.",
+    "category": "account",
+    "priority": "low",
+    "resolution": "1. Use the self-service password reset link on the company intranet.\n2. Clear your browser cache and try again.\n3. Ensure your authenticator app time is synced.\n4. If still locked out, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-008",
+    "issue": "wi-fi is very slow in the conference room on the 3rd floor.",
+    "category": "network",
+    "priority": "low",
+    "resolution": "1. Restart your router and device.\n2. Check all network cables.\n3. Try a mobile hotspot to confirm if the issue is local.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-009",
+    "issue": "i can't connect to the company vpn from home.",
+    "category": "network",
+    "priority": "medium",
+    "resolution": "1. Restart your router and device.\n2. Check all network cables.\n3. Try a mobile hotspot to confirm if the issue is local.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-010",
+    "issue": "new employee needs an account set up by monday.",
+    "category": "account",
+    "priority": "low",
+    "resolution": "1. Use the self-service password reset link on the company intranet.\n2. Clear your browser cache and try again.\n3. Ensure your authenticator app time is synced.\n4. If still locked out, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-011",
+    "issue": "i clicked a suspicious link and now see a ransom message on my screen.",
+    "category": "hardware",
+    "priority": "critical",
+    "resolution": "This issue has been identified as a critical or security incident. It is being escalated immediately to the senior support team. A specialist will contact you within the SLA window. Please do not attempt further troubleshooting.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-012",
+    "issue": "my keyboard has sticky keys after spilling coffee on it.",
+    "category": "hardware",
+    "priority": "high",
+    "resolution": "1. Power off the device immediately.\n2. Disconnect all cables and power.\n3. Bring the device to the IT desk for inspection.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-013",
+    "issue": "excel keeps showing a ref error in my formulas.",
+    "category": "software",
+    "priority": "low",
+    "resolution": "1. Close the application fully via Task Manager.\n2. Restart your computer.\n3. Check for pending updates.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-014",
+    "issue": "someone is logged into my account on a machine i don't recognise.",
+    "category": "account",
+    "priority": "critical",
+    "resolution": "This issue has been identified as a critical or security incident. It is being escalated immediately to the senior support team. A specialist will contact you within the SLA window. Please do not attempt further troubleshooting.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-015",
+    "issue": "the ceo cannot access his email since this morning.",
+    "category": "account",
+    "priority": "high",
+    "resolution": "1. Use the self-service password reset link on the company intranet.\n2. Clear your browser cache and try again.\n3. Ensure your authenticator app time is synced.\n4. If still locked out, please reply to this ticket.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-016",
+    "issue": "my laptop battery drains very fast and the fan is loud.",
+    "category": "hardware",
+    "priority": "low",
+    "resolution": "1. Power off the device immediately.\n2. Disconnect all cables and power.\n3. Bring the device to the IT desk for inspection.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-017",
+    "issue": "outlook is very slow when loading emails.",
+    "category": "software",
+    "priority": "low",
+    "resolution": "1. Close the application fully via Task Manager.\n2. Restart your computer.\n3. Check for pending updates.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-018",
+    "issue": "the file share drive is inaccessible for the entire finance department.",
+    "category": "network",
+    "priority": "high",
+    "resolution": "1. Restart your router and device.\n2. Check all network cables.\n3. Try a mobile hotspot to confirm if the issue is local.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-019",
+    "issue": "i cannot print to the office printer. it shows offline.",
+    "category": "network",
+    "priority": "medium",
+    "resolution": "1. Restart your router and device.\n2. Check all network cables.\n3. Try a mobile hotspot to confirm if the issue is local.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-020",
+    "issue": "my webcam is not detected by teams or zoom.",
+    "category": "hardware",
+    "priority": "medium",
+    "resolution": "1. Power off the device immediately.\n2. Disconnect all cables and power.\n3. Bring the device to the IT desk for inspection.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-021",
+    "issue": "the production database server is down. 200 users cannot work.",
+    "category": "software",
+    "priority": "critical",
+    "resolution": "This issue has been identified as a critical or security incident. It is being escalated immediately to the senior support team. A specialist will contact you within the SLA window. Please do not attempt further troubleshooting.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-022",
+    "issue": "how do i set up an out-of-office reply in outlook?",
+    "category": "software",
+    "priority": "low",
+    "resolution": "1. Close the application fully via Task Manager.\n2. Restart your computer.\n3. Check for pending updates.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-023",
+    "issue": "i need to transfer my files to a new laptop.",
+    "category": "hardware",
+    "priority": "medium",
+    "resolution": "1. Power off the device immediately.\n2. Disconnect all cables and power.\n3. Bring the device to the IT desk for inspection.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-024",
+    "issue": "antivirus flagged a file i downloaded. not sure if it is safe.",
+    "category": "other",
+    "priority": "high",
+    "resolution": "This issue has been identified as a critical or security incident. It is being escalated immediately to the senior support team. A specialist will contact you within the SLA window. Please do not attempt further troubleshooting.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-025",
+    "issue": "my bluetooth mouse keeps disconnecting randomly.",
+    "category": "hardware",
+    "priority": "low",
+    "resolution": "1. Power off the device immediately.\n2. Disconnect all cables and power.\n3. Bring the device to the IT desk for inspection.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-001",
+    "issue": "my laptop won't turn on after i spilled water on it.",
+    "category": "hardware",
+    "priority": "high",
+    "resolution": "1. Power off the device immediately.\n2. Disconnect all cables and power.\n3. Bring the device to the IT desk for inspection.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-002",
+    "issue": "i forgot my password and can't log into outlook.",
+    "category": "account",
+    "priority": "medium",
+    "resolution": "1. Use the self-service password reset link on the company intranet.\n2. Clear your browser cache and try again.\n3. Ensure your authenticator app time is synced.\n4. If still locked out, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-003",
+    "issue": "the entire office internet is down. no one can work.",
+    "category": "network",
+    "priority": "critical",
+    "resolution": "This issue has been identified as a critical or security incident. It is being escalated immediately to the senior support team. A specialist will contact you within the SLA window. Please do not attempt further troubleshooting.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-004",
+    "issue": "microsoft teams crashes every time i try to join a meeting.",
+    "category": "software",
+    "priority": "medium",
+    "resolution": "1. Close the application fully via Task Manager.\n2. Restart your computer.\n3. Check for pending updates.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-005",
+    "issue": "my monitor keeps flickering and sometimes goes completely black.",
+    "category": "hardware",
+    "priority": "low",
+    "resolution": "1. Power off the device immediately.\n2. Disconnect all cables and power.\n3. Bring the device to the IT desk for inspection.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-006",
+    "issue": "our erp system is completely down. all staff are affected.",
+    "category": "software",
+    "priority": "critical",
+    "resolution": "This issue has been identified as a critical or security incident. It is being escalated immediately to the senior support team. A specialist will contact you within the SLA window. Please do not attempt further troubleshooting.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-007",
+    "issue": "i need admin rights to install software for a project.",
+    "category": "account",
+    "priority": "medium",
+    "resolution": "1. Use the self-service password reset link on the company intranet.\n2. Clear your browser cache and try again.\n3. Ensure your authenticator app time is synced.\n4. If still locked out, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-008",
+    "issue": "wi-fi is very slow in the conference room on the 3rd floor.",
+    "category": "network",
+    "priority": "low",
+    "resolution": "1. Restart your router and device.\n2. Check all network cables.\n3. Try a mobile hotspot to confirm if the issue is local.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-009",
+    "issue": "i can't connect to the company vpn from home.",
+    "category": "network",
+    "priority": "medium",
+    "resolution": "1. Restart your router and device.\n2. Check all network cables.\n3. Try a mobile hotspot to confirm if the issue is local.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-010",
+    "issue": "new employee needs an account set up by monday.",
+    "category": "account",
+    "priority": "medium",
+    "resolution": "1. Use the self-service password reset link on the company intranet.\n2. Clear your browser cache and try again.\n3. Ensure your authenticator app time is synced.\n4. If still locked out, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-011",
+    "issue": "i clicked a suspicious link and now see a ransom message on my screen.",
+    "category": "other",
+    "priority": "critical",
+    "resolution": "This issue has been identified as a critical or security incident. It is being escalated immediately to the senior support team. A specialist will contact you within the SLA window. Please do not attempt further troubleshooting.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-012",
+    "issue": "my keyboard has sticky keys after spilling coffee on it.",
+    "category": "hardware",
+    "priority": "low",
+    "resolution": "1. Power off the device immediately.\n2. Disconnect all cables and power.\n3. Bring the device to the IT desk for inspection.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-013",
+    "issue": "excel keeps showing a ref error in my formulas.",
+    "category": "software",
+    "priority": "low",
+    "resolution": "1. Close the application fully via Task Manager.\n2. Restart your computer.\n3. Check for pending updates.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-014",
+    "issue": "someone is logged into my account on a machine i don't recognise.",
+    "category": "account",
+    "priority": "critical",
+    "resolution": "This issue has been identified as a critical or security incident. It is being escalated immediately to the senior support team. A specialist will contact you within the SLA window. Please do not attempt further troubleshooting.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-015",
+    "issue": "the ceo cannot access his email since this morning.",
+    "category": "account",
+    "priority": "high",
+    "resolution": "1. Use the self-service password reset link on the company intranet.\n2. Clear your browser cache and try again.\n3. Ensure your authenticator app time is synced.\n4. If still locked out, please reply to this ticket.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-016",
+    "issue": "my laptop battery drains very fast and the fan is loud.",
+    "category": "hardware",
+    "priority": "low",
+    "resolution": "1. Power off the device immediately.\n2. Disconnect all cables and power.\n3. Bring the device to the IT desk for inspection.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-017",
+    "issue": "outlook is very slow when loading emails.",
+    "category": "software",
+    "priority": "low",
+    "resolution": "1. Close the application fully via Task Manager.\n2. Restart your computer.\n3. Check for pending updates.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-018",
+    "issue": "the file share drive is inaccessible for the entire finance department.",
+    "category": "network",
+    "priority": "high",
+    "resolution": "1. Restart your router and device.\n2. Check all network cables.\n3. Try a mobile hotspot to confirm if the issue is local.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-019",
+    "issue": "i cannot print to the office printer. it shows offline.",
+    "category": "hardware",
+    "priority": "medium",
+    "resolution": "1. Power off the device immediately.\n2. Disconnect all cables and power.\n3. Bring the device to the IT desk for inspection.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-020",
+    "issue": "my webcam is not detected by teams or zoom.",
+    "category": "hardware",
+    "priority": "medium",
+    "resolution": "1. Power off the device immediately.\n2. Disconnect all cables and power.\n3. Bring the device to the IT desk for inspection.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-021",
+    "issue": "the production database server is down. 200 users cannot work.",
+    "category": "software",
+    "priority": "critical",
+    "resolution": "This issue has been identified as a critical or security incident. It is being escalated immediately to the senior support team. A specialist will contact you within the SLA window. Please do not attempt further troubleshooting.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-022",
+    "issue": "how do i set up an out-of-office reply in outlook?",
+    "category": "software",
+    "priority": "low",
+    "resolution": "1. Close the application fully via Task Manager.\n2. Restart your computer.\n3. Check for pending updates.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-023",
+    "issue": "i need to transfer my files to a new laptop.",
+    "category": "other",
+    "priority": "medium",
+    "resolution": "1. Note any error messages shown.\n2. Take a screenshot if possible.\n3. Check if colleagues are affected.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  },
+  {
+    "ticket_id": "TKT-024",
+    "issue": "antivirus flagged a file i downloaded. not sure if it is safe.",
+    "category": "other",
+    "priority": "high",
+    "resolution": "This issue has been identified as a critical or security incident. It is being escalated immediately to the senior support team. A specialist will contact you within the SLA window. Please do not attempt further troubleshooting.",
+    "escalated": true
+  },
+  {
+    "ticket_id": "TKT-025",
+    "issue": "my bluetooth mouse keeps disconnecting randomly.",
+    "category": "hardware",
+    "priority": "low",
+    "resolution": "1. Power off the device immediately.\n2. Disconnect all cables and power.\n3. Bring the device to the IT desk for inspection.\n4. If the issue persists, please reply to this ticket.",
+    "escalated": false
+  }
+]
